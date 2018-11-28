@@ -1,7 +1,8 @@
 #include <Wire.h>
 #include <Adafruit_SSD1306.h>
 #include <Adafruit_GFX.h>
-
+#include <Fonts/FreeSansBold9pt7b.h>
+#include <Fonts/FreeSerif9pt7b.h>
 //Define constants
 // OLED display TWI address
 #define OLED_ADDR   0x3C
@@ -26,14 +27,7 @@ void setup()
 
   // initialize and clear display
   display.begin(SSD1306_SWITCHCAPVCC, OLED_ADDR);
- 
-
-  // display a pixel in each corner of the screen
-  display.drawPixel(0, 0, WHITE);
-  display.drawPixel(127, 0, WHITE);
-  display.drawPixel(0, 63, WHITE);
-  display.drawPixel(127, 63, WHITE);
-
+  display.setFont(&FreeSansBold9pt7b);
 }
 
 void loop() 
@@ -65,8 +59,6 @@ void loop()
   {
     DisplaySafe();
     Serial.print("SAFE");
-   // delayMicroseconds(100);
-      
   }  
 }
 
@@ -78,9 +70,9 @@ void DisplayAlert()
   display.clearDisplay();
   display.display();
   // display a line of text
-  display.setTextSize(3.8);
+  display.setTextSize(1.95);
   display.setTextColor(WHITE);
-  display.setCursor(20,20);
+  display.setCursor(0,20);
   display.print("ALERT!");
 
   // update display with all of the above graphics
@@ -90,15 +82,13 @@ void DisplayAlert()
 
 
 //Function to display Safe Conditions 
-//Function to Display Warning
 void DisplaySafe()
 {
   display.clearDisplay();
-  //display.display();
   // display a line of text
-  display.setTextSize(4);
+  display.setTextSize(2.8);
   display.setTextColor(WHITE);
-  display.setCursor(20,20);
+  display.setCursor(0,30);
   display.print("SAFE");
 
   // update display with all of the above graphics
